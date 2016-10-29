@@ -1,10 +1,5 @@
 document.getElementByClassName("btn").onclick = validateForm(); //al presionar el boton registrar se ejecutará  la funcion validateForm
 
-var 
-
-
-
-
 function validateForm(){ //esta funcion tiene dentro a todas estas funciones que hacen validaciones
 	vacios();			//esta funcion valida que no hallan campos vacíos
 	caractValido();	//Esta es para que el usuario no ponga un caracter que no sea una letra
@@ -12,29 +7,38 @@ function validateForm(){ //esta funcion tiene dentro a todas estas funciones que
 	verifCorreo();	//esta para verificar de que sea un correo valido
 	verifContrasen();//la contraseña no puede ser igual a "password" ó "123456" ó "098754"
 	seleccion(); //para que el individuo elija una de las opciones de bicicletas 
-	agregarspan();
+	
 }
 
 function vacios(){
 	var arrageId = ["name", "lastname", "input-email", "input-password"];
+	//var container=arrageId[i];
 	var cont1 = 0;
 	for(i=0; i < arrageId.length; i++){
 		var valor = document.getElementById(arrageId[i]).value;
-		var nombre=document.getElementById("name").value;
-
 		if(  valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
 			cont1++;
 		}
 	}
 
 	if (cont1>0){
-		alert("Estos campos son obligatorios.\nHay "+cont1+" campos vacios.\n");
+		//var container=arrageId[i];
+		var container=document.getElementById("name")[0];
+		var container=document.getElementById("lastname")[1];
+		var container=document.getElementById("input-email")[2];
+		var container=document.getElementById("input-password")[3];
+		var elemento = document.createElement("span");
+		
+		var mensaje = document.createTextNode("No debe dejar ningun campo vacío");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
 	}
 }
 
-//Esta funcion  declara un arreglo con los campos a llenar y un contador que se inicializa en cero
-//que contará si hay campos vacíos, de haberlos saldrá la alerta de que hay x campos vacios
-//el contador al ser mayor a cero quiere decir que encontro campos vacios y saldra la alerta
 
 function caractValido(){
 	var arrageId = ["name", "lastname"];
@@ -46,7 +50,17 @@ function caractValido(){
 		}
 	}
 	if (cont2>0){
-		alert("Ingrese caracteres validos para el campo nombre y apellido.");
+		var container=document.getElementById("name")[0];
+		var container=document.getElementById("lastname")[1];
+		var elemento = document.createElement("span");
+		
+		var mensaje = document.createTextNode("Ingrese caracteres validos para el campo nombre y apellido.");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
 	}
 }
 //Esta funcion tiene un arreglo con dos campos, y un contador que al contar un caracter no valido
@@ -61,8 +75,19 @@ function letraMayuscula(){
 			cont3++;											//al caracter q esta en la posicion cero de la variable valor entonces el cont suma 1
 		}
 	}
-	if (cont3>0){ //si el cont3 es mayor a cero lanza esta advertencia
-		alert("Ingrese nombre y apellido con la primera letra en mayuscula.");
+	if (cont3>0){ 
+		var container=document.getElementById("name")[0];
+		var container=document.getElementById("lastname")[1];
+		var elemento = document.createElement("span");
+		
+		var mensaje = document.createTextNode("Ingrese nombre y apellido con la primera letra en mayuscula.");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
+
 	}
 }
 
@@ -74,7 +99,17 @@ function verifCorreo(){
 		cont4++;
 	}
 	if (cont4>0){
-		alert("Debe ingresar un correo con el formato correcto.");
+		var container=document.getElementById("input-email")[0];
+		var elemento = document.createElement("span");
+		
+		var mensaje = document.createTextNode("Debe ingresar un correo con el formato correcto.");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
+
 	}
 }
 
@@ -92,25 +127,32 @@ function verifContrasen(){
 		cont5++;
 	}
 	if (cont5>0){//si el cont5 es mayor a cero sale la alerta con la cadena
-		alert(cadena);
+		var container=document.getElementById("input-password")[0];
+		var elemento = document.createElement("span");
+
+		var mensaje = document.createTextNode("contraseña muy debil. ");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
 	}
 }
 
 function seleccion(){// esta funcion se asegura de que el usuario elija un tipo de bici
 	var valor = document.querySelector('select').selectedIndex;//este se ocupa cuando hay varias opciones y se debe seleccionar una de la lista
 	if( valor == null || valor == 0 ){//si no elije nada saldra la alerta
-  		alert("Debe seleccionar un tipo de bicicleta.");
+  		//alert("Debe seleccionar un tipo de bicicleta.");
+  		var container=document.getElementByClassName("form-control")[0];
+		var elemento = document.createElement("span");
+
+		var mensaje = document.createTextNode("Debe seleccionar un tipo de bicicleta.");
+			
+		elemento.appendChild(mensaje);
+			
+		container.appendChild(elemento);
+			
+		return false;
 	}
 }
-
-function span(){
-	var agregar =document.getElementByTagClass("input-box");
-	var elementoSpan= document.createElement("span");
-	var nodoTexto=document.createTextNode("p");
-	
-	elementoSpan.appendChild(nodoTexto);
-	agregar.appendChild(elementoSpan);
-
-}
-
-	span();
